@@ -1,0 +1,30 @@
+[Unit]
+Description=Alerim Mining Pool Server
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+User=alerim
+Group=alerim
+Type=simple
+WorkingDirectory=/opt/alerim
+ExecStart=/usr/local/bin/alerimnode
+Restart=always
+RestartSec=5
+StandardOutput=append:/var/log/alerim/alerim.log
+StandardError=append:/var/log/alerim/error.log
+
+# Security settings
+NoNewPrivileges=yes
+ProtectSystem=full
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+
+# Resource limits
+LimitNOFILE=65535
+LimitNPROC=4096
+TasksMax=4096
+
+[Install]
+WantedBy=multi-user.target

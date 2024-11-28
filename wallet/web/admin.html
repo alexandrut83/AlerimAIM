@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerim Admin Panel</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <nav class="admin-nav">
+            <div class="logo">Alerim Admin</div>
+            <ul>
+                <li><a href="#dashboard" class="active">Dashboard</a></li>
+                <li><a href="#users">Users</a></li>
+                <li><a href="#wallets">Wallets</a></li>
+                <li><a href="#miners">Miners</a></li>
+                <li><a href="#settings">Settings</a></li>
+            </ul>
+            <div class="user-info">
+                <span id="admin-name">Admin</span>
+                <button onclick="logout()">Logout</button>
+            </div>
+        </nav>
+
+        <main class="admin-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="active">
+                <h2>Dashboard</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Hash Rate</h3>
+                        <p id="total-hashrate">0 H/s</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Active Miners</h3>
+                        <p id="active-miners">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Users</h3>
+                        <p id="total-users">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Network Difficulty</h3>
+                        <p id="network-difficulty">0</p>
+                    </div>
+                </div>
+                <div class="mining-chart">
+                    <canvas id="hashrate-chart"></canvas>
+                </div>
+            </section>
+
+            <!-- Users Section -->
+            <section id="users">
+                <h2>User Management</h2>
+                <div class="action-bar">
+                    <button onclick="showAddUserModal()">Add User</button>
+                    <input type="text" id="user-search" placeholder="Search users...">
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-table-body">
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Wallets Section -->
+            <section id="wallets">
+                <h2>Wallet Management</h2>
+                <div class="action-bar">
+                    <button onclick="createNewWallet()">Create New Wallet</button>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Address</th>
+                            <th>Balance</th>
+                            <th>Owner</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="wallets-table-body">
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Miners Section -->
+            <section id="miners">
+                <h2>Mining Workers</h2>
+                <div class="action-bar">
+                    <button onclick="showAddMinerModal()">Add Miner</button>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Worker ID</th>
+                            <th>Hash Rate</th>
+                            <th>Status</th>
+                            <th>Last Share</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="miners-table-body">
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="add-user-modal" class="modal">
+        <div class="modal-content">
+            <h3>Add New User</h3>
+            <form id="add-user-form">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <select name="role">
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                </select>
+                <input type="password" name="password" placeholder="Password" required>
+                <div class="modal-actions">
+                    <button type="submit">Add User</button>
+                    <button type="button" onclick="closeModal('add-user-modal')">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="add-miner-modal" class="modal">
+        <div class="modal-content">
+            <h3>Add Mining Worker</h3>
+            <form id="add-miner-form">
+                <input type="text" name="worker-name" placeholder="Worker Name" required>
+                <input type="text" name="wallet-address" placeholder="Wallet Address" required>
+                <select name="algorithm">
+                    <option value="sha256">SHA-256</option>
+                </select>
+                <div class="modal-actions">
+                    <button type="submit">Add Worker</button>
+                    <button type="button" onclick="closeModal('add-miner-modal')">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

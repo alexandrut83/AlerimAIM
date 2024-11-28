@@ -1,0 +1,75 @@
+server:
+  host: "147.78.130.55"
+  stratum_port: 3333
+  api_port: 8080
+  admin_port: 8081
+  ssl_enabled: false
+
+mining:
+  network: "mainnet"
+  block_reward: 50
+  pool_fee: 2.0
+  payout_threshold: 1.0
+  maturity_depth: 100
+  payout_interval: "24h"
+  target_share_time: "10s"
+  vardiff_retarget_time: "120s"
+  min_difficulty: 1
+  max_difficulty: 1000000
+
+admin:
+  username: "alex11alerim"
+  password: "153118!Alex"
+  session_timeout: "24h"
+  api_token_expiry: "168h"
+
+database:
+  type: "postgresql"
+  host: "localhost"
+  port: 5432
+  name: "alerim_pool"
+  user: "alerim_user"
+  password: "your_secure_password"
+  max_connections: 100
+  ssl_mode: "disable"
+
+wallet:
+  rpc_url: "http://127.0.0.1:8332"
+  rpc_user: "alerim_wallet"
+  rpc_password: "your_wallet_password"
+  confirmations_required: 6
+  wallet_refresh_interval: "5m"
+
+logging:
+  level: "info"
+  format: "json"
+  output: "file"
+  file_path: "/var/log/alerim/pool.log"
+  max_size: 100
+  max_age: 30
+  max_backups: 10
+  compress: true
+
+monitoring:
+  enabled: true
+  prometheus_port: 9090
+  metrics_path: "/metrics"
+  collection_interval: "15s"
+
+email:
+  enabled: false
+  smtp_host: "smtp.example.com"
+  smtp_port: 587
+  smtp_user: "notifications@example.com"
+  smtp_password: "your_smtp_password"
+  from_address: "no-reply@example.com"
+
+security:
+  max_login_attempts: 5
+  lockout_duration: "30m"
+  password_min_length: 8
+  require_2fa: false
+  allowed_ips: []
+  rate_limit:
+    enabled: true
+    requests_per_minute: 60

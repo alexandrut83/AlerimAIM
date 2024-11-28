@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerim Wallet</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Alerim Wallet</a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Wallet Dashboard</h5>
+                        <div class="balance-section mb-4">
+                            <h2>Balance: <span id="balance">0.00</span> AIM</h2>
+                        </div>
+                        
+                        <div class="wallet-actions mb-4">
+                            <button id="generateWallet" class="btn btn-primary">Generate New Wallet</button>
+                            <button id="importWallet" class="btn btn-secondary">Import Wallet</button>
+                        </div>
+
+                        <div id="walletInfo" class="d-none">
+                            <div class="mb-3">
+                                <label>Public Address:</label>
+                                <div class="input-group">
+                                    <input type="text" id="publicAddress" class="form-control" readonly>
+                                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('publicAddress')">Copy</button>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label>Private Key (Keep this secret!):</label>
+                                <div class="input-group">
+                                    <input type="password" id="privateKey" class="form-control" readonly>
+                                    <button class="btn btn-outline-secondary" type="button" onclick="togglePrivateKey()">Show/Hide</button>
+                                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('privateKey')">Copy</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="transaction-section mt-4">
+                            <h5>Send AIM</h5>
+                            <div class="mb-3">
+                                <label>Recipient Address:</label>
+                                <input type="text" id="recipientAddress" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label>Amount (AIM):</label>
+                                <input type="number" id="amount" class="form-control" step="0.01">
+                            </div>
+                            <button id="sendTransaction" class="btn btn-success">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <script src="wallet.js"></script>
+</body>
+</html>
